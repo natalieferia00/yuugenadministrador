@@ -1,0 +1,45 @@
+:root {
+  --bg: #0a0a0a;
+  --sidebar: #121212;
+  --accent: #fdfd96;
+  --text: #ffffff;
+  --gray: #252525;
+}
+
+body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
+
+.admin-layout { display: flex; height: 100vh; }
+
+/* SIDEBAR */
+.sidebar {
+  width: 260px; background: var(--sidebar); padding: 40px 20px;
+  border-right: 1px solid var(--gray);
+}
+.admin-logo { font-weight: 900; font-size: 1.5rem; margin-bottom: 50px; letter-spacing: -1px; }
+nav button {
+  width: 100%; background: none; border: none; color: #888;
+  display: flex; align-items: center; gap: 12px; padding: 15px;
+  cursor: pointer; border-radius: 10px; margin-bottom: 5px; font-weight: 600;
+}
+nav button.active { background: var(--gray); color: var(--accent); }
+
+/* CONTENT */
+.content { flex-grow: 1; padding: 50px; overflow-y: auto; }
+.content-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+.add-btn {
+  background: var(--accent); color: #000; border: none; padding: 12px 25px;
+  border-radius: 8px; font-weight: 900; cursor: pointer; display: flex; align-items: center; gap: 8px;
+}
+
+/* TABLE */
+.table-container { background: var(--sidebar); border-radius: 20px; padding: 20px; border: 1px solid var(--gray); }
+.admin-table { width: 100%; border-collapse: collapse; text-align: left; }
+.admin-table th { padding: 20px; border-bottom: 1px solid var(--gray); color: #555; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; }
+.admin-table td { padding: 20px; border-bottom: 1px solid var(--gray); font-size: 0.9rem; }
+.thumb { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; }
+
+.status-badge { padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; }
+.status-badge.available { background: #c1f0cf; color: #1e4620; }
+.status-badge.sold { background: #ffd1d1; color: #7a2020; }
+
+.action-btn.delete { color: #ff4d4d; background: none; border: none; cursor: pointer; }

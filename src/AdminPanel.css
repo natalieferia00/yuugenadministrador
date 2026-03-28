@@ -1,0 +1,230 @@
+:root {
+  --sidebar-width: 260px;
+  --accent-color: #fdfd96; /* Amarillo pastel Yuugen */
+  --bg-dark: #0a0a0a;
+  --card-bg: #121212;
+  --border-color: #252525;
+  --text-muted: #888888;
+  --danger-color: #ff4757;
+  --success-color: #2ecc71;
+}
+
+/* RESET & LAYOUT */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+  color: white;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--card-bg);
+  border-right: 1px solid var(--border-color);
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  z-index: 10;
+}
+
+.admin-logo {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin-bottom: 50px;
+  color: var(--accent-color);
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar button {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  padding: 15px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+}
+
+.sidebar button:hover {
+  color: white;
+  background-color: #1a1a1a;
+}
+
+.sidebar button.active {
+  background-color: var(--border-color);
+  color: var(--accent-color);
+}
+
+/* CONTENIDO PRINCIPAL */
+.content {
+  margin-left: var(--sidebar-width);
+  flex-grow: 1;
+  padding: 60px;
+  max-width: 1200px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 40px;
+  letter-spacing: -1px;
+}
+
+/* FORMULARIO DE REGISTRO */
+.admin-form {
+  background-color: var(--card-bg);
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 50px;
+}
+
+.inputs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.inputs-grid input, 
+.inputs-grid textarea {
+  background: #1a1a1a;
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  color: white;
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.inputs-grid input:focus, 
+.inputs-grid textarea:focus {
+  border-color: var(--accent-color);
+}
+
+.inputs-grid textarea {
+  grid-column: span 2;
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* BOTÓN REGISTRAR (Submit) */
+.admin-form button[type="submit"] {
+  grid-column: span 2;
+  background-color: var(--accent-color);
+  color: #000;
+  padding: 18px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 900;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.admin-form button[type="submit"]:hover:not(:disabled) {
+  transform: translateY(-3px);
+  filter: brightness(1.1);
+  box-shadow: 0 10px 20px rgba(253, 253, 150, 0.15);
+}
+
+.admin-form button[type="submit"]:disabled {
+  background-color: var(--border-color);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* TABLA DE PRODUCTOS */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.admin-table th {
+  padding: 20px;
+  text-align: left;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  border-bottom: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.admin-table td {
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+}
+
+.thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+
+/* BOTÓN ELIMINAR */
+.del-btn {
+  background-color: #1a1a1a;
+  color: var(--danger-color);
+  border: 1px solid #331a1a;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.del-btn:hover {
+  background-color: var(--danger-color);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(255, 71, 87, 0.2);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .sidebar { width: 70px; padding: 20px 10px; }
+  .admin-logo, .sidebar button span { display: none; }
+  .content { margin-left: 70px; padding: 30px; }
+  .inputs-grid { grid-template-columns: 1fr; }
+  .inputs-grid textarea, .admin-form button[type="submit"] { grid-column: span 1; }
+}
