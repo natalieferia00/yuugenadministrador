@@ -6,16 +6,27 @@
   --gray: #252525;
 }
 
-body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-.admin-layout { display: flex; height: 100vh; }
+/* LAYOUT PRINCIPAL */
+.admin-layout { 
+  display: grid; 
+  grid-template-columns: 260px 1fr; /* Desktop: Sidebar fija y contenido flexible */
+  min-height: 100vh; 
+}
 
 /* SIDEBAR */
 .sidebar {
-  width: 260px; background: var(--sidebar); padding: 40px 20px;
+  background: var(--sidebar); 
+  padding: 40px 20px;
   border-right: 1px solid var(--gray);
+  position: sticky;
+  top: 0;
+  height: 100vh;
 }
-.admin-logo { font-weight: 900; font-size: 1.5rem; margin-bottom: 50px; letter-spacing: -1px; }
+
+.admin-logo { font-weight: 900; font-size: 1.5rem; margin-bottom: 50px; letter-spacing: -1px; text-align: center; }
+
 nav button {
   width: 100%; background: none; border: none; color: #888;
   display: flex; align-items: center; gap: 12px; padding: 15px;
@@ -24,22 +35,100 @@ nav button {
 nav button.active { background: var(--gray); color: var(--accent); }
 
 /* CONTENT */
-.content { flex-grow: 1; padding: 50px; overflow-y: auto; }
-.content-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
-.add-btn {
-  background: var(--accent); color: #000; border: none; padding: 12px 25px;
-  border-radius: 8px; font-weight: 900; cursor: pointer; display: flex; align-items: center; gap: 8px;
+.content { padding: 40px; max-width: 100%; box-sizing: border-box; }
+
+.content-header { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 40px; 
+  gap: 15px;
 }
 
-/* TABLE */
-.table-container { background: var(--sidebar); border-radius: 20px; padding: 20px; border: 1px solid var(--gray); }
-.admin-table { width: 100%; border-collapse: collapse; text-align: left; }
-.admin-table th { padding: 20px; border-bottom: 1px solid var(--gray); color: #555; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; }
-.admin-table td { padding: 20px; border-bottom: 1px solid var(--gray); font-size: 0.9rem; }
-.thumb { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; }
+/* TABLA RESPONSIVE ADAPTABLE */
+.table-container { 
+  background: var(--sidebar); 
+  border-radius: 20px; 
+  padding: 20px; 
+  border: 1px solid var(--gray);
+  width: 100%;
+  box-sizing: border-box;
+}
 
-.status-badge { padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; }
-.status-badge.available { background: #c1f0cf; color: #1e4620; }
-.status-badge.sold { background: #ffd1d1; color: #7a2020; }
+.admin-table { width: 100%; border-collapse: collapse; }
+.admin-table th { 
+  padding: 15px; 
+  border-bottom: 1px solid var(--gray); 
+  color: #555; 
+  text-transform: uppercase; 
+  font-size: 0.7rem; 
+  text-align: left;
+}
+.admin-table td { padding: 15px; border-bottom: 1px solid var(--gray); font-size: 0.9rem; }
+.thumb { width: 45px; height: 45px; border-radius: 8px; object-fit: cover; }
 
-.action-btn.delete { color: #ff4d4d; background: none; border: none; cursor: pointer; }
+/* --- MEDIA QUERIES (EL CAMBIO REAL) --- */
+
+@media (max-width: 900px) {
+  .admin-layout {
+    grid-template-columns: 1fr; /* Una sola columna en tablet/móvil */
+  }
+
+  .sidebar {
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid var(--gray);
+    padding: 20px;
+  }
+
+  .admin-logo { margin-bottom: 20px; }
+
+  nav {
+    display: flex;
+    overflow-x: auto; /* Scroll horizontal para los botones del menú */
+    padding-bottom: 10px;
+    gap: 10px;
+  }
+  
+  nav button { width: auto; white-space: nowrap; }
+
+  .content { padding: 20px; }
+
+  .content-header { flex-direction: column; align-items: flex-start; }
+  .add-btn { width: 100%; justify-content: center; }
+
+  /* CONVERTIR TABLA EN CARDS PARA MÓVIL */
+  .admin-table, .admin-table thead, .admin-table tbody, .admin-table th, .admin-table td, .admin-table tr { 
+    display: block; 
+  }
+
+  .admin-table thead { display: none; } /* Escondemos los encabezados */
+
+  .admin-table tr {
+    margin-bottom: 15px;
+    border: 1px solid var(--gray);
+    border-radius: 15px;
+    padding: 10px;
+    background: #1a1a1a;
+  }
+
+  .admin-table td {
+    border-bottom: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 5px;
+    text-align: right;
+  }
+
+  /* Añadimos etiquetas para saber qué es cada dato en el móvil */
+  .admin-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #555;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    float: left;
+  }
+}
