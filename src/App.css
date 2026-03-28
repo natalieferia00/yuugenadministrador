@@ -17,14 +17,14 @@ body {
   overflow-x: hidden;
 }
 
-/* LAYOUT DINÁMICO */
+/* --- LAYOUT PRINCIPAL --- */
 .admin-layout { 
   display: flex; 
   min-height: 100vh;
   width: 100%;
 }
 
-/* SIDEBAR - Mejorado para PC */
+/* --- SIDEBAR (PC) --- */
 .sidebar {
   width: var(--sidebar-width);
   background: var(--sidebar); 
@@ -38,59 +38,69 @@ body {
   flex-direction: column;
 }
 
-.admin-logo { font-weight: 900; font-size: 1.5rem; margin-bottom: 50px; letter-spacing: -1px; }
+/* LOGO: yuugen (Minimalista) */
+.admin-logo { 
+  font-weight: 900; 
+  font-size: 1.8rem; 
+  margin-bottom: 50px; 
+  letter-spacing: -1.5px; 
+  text-transform: lowercase; /* Estilo yuugen */
+  text-align: center;
+}
 
 nav { flex-grow: 1; }
 nav button {
   width: 100%; background: none; border: none; color: #888;
   display: flex; align-items: center; gap: 12px; padding: 15px;
-  cursor: pointer; border-radius: 10px; margin-bottom: 5px; font-weight: 600;
-  transition: 0.2s;
+  cursor: pointer; border-radius: 12px; margin-bottom: 8px; font-weight: 600;
+  transition: 0.2s ease;
 }
 nav button:hover { background: var(--gray); color: #fff; }
 nav button.active { background: var(--gray); color: var(--accent); }
 
-/* CONTENIDO PRINCIPAL - Adaptable */
+/* --- CONTENIDO --- */
 .content { 
   flex-grow: 1; 
   padding: 40px; 
-  min-width: 0; /* Clave para que el flexbox no se desborde */
+  min-width: 0; 
 }
 
+/* TÍTULO CORREGIDO: Yuugen Admin */
 .content-header { 
   display: flex; 
   justify-content: space-between; 
   align-items: center; 
   margin-bottom: 40px;
   gap: 20px;
-  flex-wrap: wrap; /* Para que el botón baje en pantallas pequeñas */
 }
 
-.add-btn {
-  background: var(--accent); color: #000; border: none; padding: 12px 25px;
-  border-radius: 8px; font-weight: 900; cursor: pointer; display: flex; 
-  align-items: center; gap: 8px; white-space: nowrap;
+.content-header h2 { 
+  margin: 0; 
+  font-size: 1.8rem; 
+  font-weight: 900; 
+  letter-spacing: -1px; 
 }
 
-/* TABLA - Sistema de Scroll Seguro */
+/* --- TABLA RESPONSIVE --- */
 .table-container { 
   background: var(--sidebar); 
   border-radius: 20px; 
   padding: 10px; 
   border: 1px solid var(--gray);
-  overflow-x: auto; /* Permite scroll horizontal solo si la tabla es muy ancha */
+  overflow-x: auto; 
   width: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 .admin-table { 
   width: 100%; 
   border-collapse: collapse; 
   text-align: left;
-  min-width: 650px; /* Evita que las columnas se aplasten en tablet/móvil */
+  min-width: 650px; /* Evita que la info se amontone en móvil */
 }
 
 .admin-table th { 
-  padding: 18px 20px; 
+  padding: 20px; 
   border-bottom: 1px solid var(--gray); 
   color: #555; 
   text-transform: uppercase; 
@@ -106,18 +116,24 @@ nav button.active { background: var(--gray); color: var(--accent); }
 
 .thumb { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; }
 
-/* BADGES */
-.status-badge { padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; display: inline-block; }
-.status-badge.available { background: #c1f0cf; color: #1e4620; }
-.status-badge.sold { background: #ffd1d1; color: #7a2020; }
+/* ACCIONES Y BOTONES */
+.action-btn.delete { 
+  color: #ff4d4d; 
+  background: none; 
+  border: none; 
+  cursor: pointer; 
+  padding: 8px;
+  transition: 0.2s;
+}
 
-/* --- RESPONSIVE ADAPTATION --- */
+.action-btn.delete:hover { opacity: 0.7; }
+
+/* --- MEDIA QUERIES --- */
 
 /* TABLETS */
 @media (max-width: 1024px) {
   :root { --sidebar-width: 220px; }
   .content { padding: 30px; }
-  .admin-table { min-width: 600px; }
 }
 
 /* MÓVILES */
@@ -131,41 +147,29 @@ nav button.active { background: var(--gray); color: var(--accent); }
     border-right: none;
     border-bottom: 1px solid var(--gray);
     position: relative;
-    top: 0;
   }
 
-  .admin-logo { margin-bottom: 20px; text-align: center; }
+  .admin-logo { margin-bottom: 20px; }
 
   nav { 
     display: flex; 
     gap: 10px; 
-    overflow-x: auto; /* El menú se puede deslizar de lado */
-    padding-bottom: 10px;
-    scrollbar-width: none; /* Oculta scrollbar en Firefox */
+    overflow-x: auto; 
+    padding-bottom: 5px;
+    scrollbar-width: none;
   }
   
-  nav::-webkit-scrollbar { display: none; } /* Oculta scrollbar en Chrome/Safari */
+  nav::-webkit-scrollbar { display: none; }
   
-  nav button { 
-    width: auto; 
-    white-space: nowrap; 
-    padding: 10px 18px; 
-    font-size: 0.85rem;
-  }
+  nav button { width: auto; white-space: nowrap; padding: 10px 15px; }
 
   .content { padding: 20px; }
 
   .content-header { 
     flex-direction: column; 
-    align-items: stretch; 
-    gap: 15px; 
+    align-items: center; 
     text-align: center;
   }
 
-  .add-btn { width: 100%; justify-content: center; }
-  
-  .table-container { 
-    border-radius: 12px;
-    margin-top: 10px;
-  }
+  .table-container { border-radius: 12px; }
 }
