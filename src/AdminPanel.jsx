@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { LayoutDashboard, PlusCircle, Trash2, Image as ImageIcon } from 'lucide-react';
+import { LayoutDashboard, PlusCircle, Trash2 } from 'lucide-react';
 import './AdminPanel.css';
 
 const AdminPanel = () => {
